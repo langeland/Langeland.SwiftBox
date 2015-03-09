@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="../../favicon.ico">
+
+	<title><f:render section="Title" /></title>
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="http://static.jquery.com/ui/css/demo-docs-theme/ui.theme.css" type="text/css" media="all" />
+	<link rel="stylesheet" type="text/css" media="screen" href="{f:uri.resource(path: 'StyleSheets/Main.css')}">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body role="document">
+<f:comment>
+<div class="container">
+	<f:flashMessages as="flashMessages">
+		<dl class="messages">
+			<f:for each="{flashMessages}" as="flashMessage">
+				<f:switch expression="{flashMessage.severity}">
+					<f:case value="Error"><div class="alert alert-danger" role="alert"><span class='glyphicon glyphicon-remove-circle' aria-hidden='true'></span><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> {flashMessage}</div></f:case>
+					<f:case value="OK"><div class="alert alert-success" role="alert"><span class='glyphicon glyphicon-ok-circle' aria-hidden='true'></span><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> {flashMessage}</div></f:case>
+					<f:defaultCase><div class="alert alert-info" role="alert"><span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> {flashMessage}</div></f:defaultCase>
+				</f:switch>
+			</f:for>
+		</dl>
+	</f:flashMessages>
+</div>
+</f:comment>
+
+
+<div class="container">
+	<!-- Modal -->
+	<f:flashMessages as="flashMessages">
+		<div class="modal fade" id="flashMessagesModal" tabindex="-1" role="dialog" aria-labelledby="flashMessagesModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<f:for each="{flashMessages}" as="flashMessage">
+							<f:switch expression="{flashMessage.severity}">
+								<f:case value="Error">
+									<div class="bs-callout bs-callout-warning" role="alert">
+										<f:if condition="{flashMessage.title}"><h4>{flashMessage.title}</h4></f:if>
+										{flashMessage.message}
+									</div>
+								</f:case>
+								<f:case value="OK">
+									<div class="bs-callout bs-callout-success" role="alert">
+										<f:if condition="{flashMessage.title}"><h4>{flashMessage.title}</h4></f:if>
+										{flashMessage}
+									</div>
+								</f:case>
+								<f:defaultCase>
+									<div class="bs-callout bs-callout-info" role="alert">
+										<f:if condition="{flashMessage.title}"><h4>{flashMessage.title}</h4></f:if>
+										{flashMessage}
+									</div>
+								</f:defaultCase>
+							</f:switch>
+						</f:for>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Luk</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</f:flashMessages>
+</div>
+
+<div class="container" role="main">
+	<f:render section="Content" />
+</div> <!-- /container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="{f:uri.resource(path: 'JavaScript/bootstrap.min.js')}"></script>
+<script src="{f:uri.resource(path: 'JavaScript/application.js')}"></script>
+
+</body>
+</html>

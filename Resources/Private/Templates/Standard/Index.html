@@ -1,0 +1,36 @@
+<f:layout name="Default"/>
+
+<f:section name="Title">Ændring af adgange - Provst</f:section>
+<f:section name="Content">
+	<div class="page-header">
+		<h1 class="header">
+			<f:render section="Title"/>
+		</h1>
+	</div>
+
+	<table class="table table-condensed">
+		<thead>
+		<tr>
+			<th>From</th>
+			<th>To</th>
+			<th>Subject</th>
+			<th>Received</th>
+		</tr>
+		</thead>
+		<tbody>
+		<f:for each="{messages}" as="message">
+			<tr>
+				<td>&lt;mail@example.tld&gt;</td>
+				<td>&lt;mail@example.tld&gt;</td>
+				<td>{message.subject}</td>
+				<td><f:format.date format="d.m.Y - H:i:s">{message.date}</f:format.date></td>
+			</tr>
+		</f:for>
+		</tbody>
+	</table>
+
+
+
+
+
+</f:section>
