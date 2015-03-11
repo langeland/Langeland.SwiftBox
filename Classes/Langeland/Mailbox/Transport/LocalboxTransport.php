@@ -2,13 +2,8 @@
 namespace Langeland\Mailbox\Transport;
 
 /*                                                                        *
- * This script belongs to the FLOW3 package "SwiftMailer".                *
+ * This script belongs to the TYPO3 Flow package "Langeland.Mailbox".     *
  *                                                                        *
- * It is free software; you can redistribute it and/or modify it under    *
- * the terms of the GNU Lesser General Public License, either version 3   *
- * of the License, or (at your option) any later version.                 *
- *                                                                        *
- * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
 use TYPO3\Flow\Annotations as Flow;
@@ -19,8 +14,6 @@ use TYPO3\Flow\Annotations as Flow;
  * Originally written by Ernesto Baschny <ernst@cron-it.de>
  */
 class LocalboxTransport implements \TYPO3\SwiftMailer\TransportInterface {
-
-
 
 	/**
 	 *
@@ -34,7 +27,6 @@ class LocalboxTransport implements \TYPO3\SwiftMailer\TransportInterface {
 	 * @Flow\Inject
 	 */
 	protected $persistenceManager;
-
 
 	/**
 	 * @var string The file to write the mails into
@@ -64,14 +56,16 @@ class LocalboxTransport implements \TYPO3\SwiftMailer\TransportInterface {
 	 *
 	 * @return void
 	 */
-	public function start() {}
+	public function start() {
+	}
 
 	/**
 	 * No op
 	 *
 	 * @return void
 	 */
-	public function stop() {}
+	public function stop() {
+	}
 
 	/**
 	 * Outputs the mail to a text file according to RFC 4155.
@@ -82,12 +76,11 @@ class LocalboxTransport implements \TYPO3\SwiftMailer\TransportInterface {
 	 */
 	public function send(\Swift_Mime_Message $message, &$failedRecipients = NULL) {
 
-
 		$localMessage = new \Langeland\Mailbox\Domain\Model\Message();
 		$localMessage->setMessageId($message->getId());
 		$localMessage->setSubject($message->getSubject());
 		$localMessage->setDate(new \dateTime('@' . $message->getDate()));
-//		$localMessage->setFrom($this->getReversePath($message));
+		$localMessage->setFrom($message->getFrom());
 		$localMessage->setTo($message->getTo());
 		$localMessage->setBody($message->getBody());
 		$localMessage->setRawMessage($message->toString());
@@ -95,7 +88,7 @@ class LocalboxTransport implements \TYPO3\SwiftMailer\TransportInterface {
 		$this->messageRepository->add($localMessage);
 		$this->persistenceManager->persistAll();
 
-			// Return every receipient as "delivered"
+		// Return every receipient as "delivered"
 		return count((array)$message->getTo()) + count((array)$message->getCc()) + count((array)$message->getBcc());
 	}
 
@@ -128,6 +121,7 @@ class LocalboxTransport implements \TYPO3\SwiftMailer\TransportInterface {
 	 * @param \Swift_Events_EventListener $plugin
 	 * @return void
 	 */
-	public function registerPlugin(\Swift_Events_EventListener $plugin) {}
+	public function registerPlugin(\Swift_Events_EventListener $plugin) {
+	}
 
 }

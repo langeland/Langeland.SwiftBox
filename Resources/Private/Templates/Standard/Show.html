@@ -1,0 +1,24 @@
+{namespace mbx=Langeland\Mailbox\ViewHelpers}
+<f:layout name="Default"/>
+
+<f:section name="Title">{message.subject}</f:section>
+<f:section name="Content">
+	<div class="page-header">
+		<h1 class="header">
+			<f:render section="Title" arguments="{_all}"/>
+		</h1>
+	</div>
+
+	{message.subject}
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Panel title</h3>
+		</div>
+		<div class="panel-body">
+			{message.body}
+		</div>
+	</div>
+
+
+</f:section>

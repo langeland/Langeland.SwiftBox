@@ -26,7 +26,6 @@ class Message {
 	 */
 	protected $subject;
 
-
 	/**
 	 * @ORM\Column(nullable=true)
 	 * @var \DateTime
@@ -34,25 +33,25 @@ class Message {
 	protected $date;
 
 	/**
-	 * @ORM\Column(name="from_msg", nullable=true)
-	 * @var string
+	 * @ORM\Column(name="`from`", type="json_array", nullable=true)
+	 * @var array
 	 */
 	protected $from;
 
 	/**
-	 * @ORM\Column(name="to_msg", nullable=true)
-	 * @var string
+	 * @ORM\Column(name="`to`", type="json_array", nullable=true)
+	 * @var array
 	 */
 	protected $to;
 
 	/**
-	 * @ORM\Column(nullable=true, type="blob")
+	 * @ORM\Column(nullable=true, type="text")
 	 * @var string
 	 */
 	protected $body;
 
 	/**
-	 * @ORM\Column(nullable=true, type="blob")
+	 * @ORM\Column(nullable=true, type="text")
 	 * @var string
 	 */
 	protected $rawMessage;
@@ -106,14 +105,14 @@ class Message {
 	}
 
 	/**
-	 * @return string
+	 * @return array
 	 */
 	public function getFrom() {
 		return $this->from;
 	}
 
 	/**
-	 * @param string $from
+	 * @param array $from
 	 * @return $this
 	 */
 	public function setFrom($from) {
@@ -122,14 +121,14 @@ class Message {
 	}
 
 	/**
-	 * @return string
+	 * @return array
 	 */
 	public function getTo() {
 		return $this->to;
 	}
 
 	/**
-	 * @param string $to
+	 * @param array $to
 	 * @return $this
 	 */
 	public function setTo($to) {
