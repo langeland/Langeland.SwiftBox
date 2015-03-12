@@ -3,20 +3,22 @@
 
 <f:section name="Title">{message.subject}</f:section>
 <f:section name="Content">
-	<div class="page-header">
-		<h1 class="header">
-			<f:render section="Title" arguments="{_all}"/>
-		</h1>
-	</div>
-
-	{message.subject}
-
+	<h1><f:render section="Title" arguments="{_all}"/></h1>
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title">Panel title</h3>
+			<dl class="dl-horizontal">
+				<dt>Received</dt>
+				<dd>Wednesday, 11 Mar 2015 5:19:08 PM</dd>
+				<dt>From</dt>
+				<dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+				<dt>To</dt>
+				<dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+				<dt>Subject</dt>
+				<dd>Udskiftning af WNK kode for: Niels Arne Christensen (NAC@km.dk)</dd>
+			</dl>
 		</div>
 		<div class="panel-body">
-			{message.body}
+			<iframe src="{f:uri.action(action:'show', format: 'message', arguments: {message: message})}" id="message-render"></iframe>
 		</div>
 	</div>
 

@@ -24,9 +24,14 @@ class StandardController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 	protected $persistenceManager;
 
 	/**
+	 * @param string $q
 	 * @return void
 	 */
-	public function indexAction() {
+	public function indexAction($q = null) {
+
+		if($q){
+			die('Searching for: ' . $q);
+		}
 
 		$messages = $this->messageRepository->findAll();
 
