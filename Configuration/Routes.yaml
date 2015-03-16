@@ -1,0 +1,25 @@
+#                                                                        #
+# Routes configuration for the Blog package                              #
+#                                                                        #
+#
+
+-
+  name: 'Messages list'
+  uriPattern:    'messages'
+  defaults:
+    '@action':     'index'
+    '@format':     'html'
+
+-
+  name: Mmailbox actions'
+  uriPattern:     'messages/{@action}(/{@format})'
+  defaults:
+    '@format':     'html'
+    '@controller': 'Standard'
+
+-
+  name: 'Message actions'
+  uriPattern:     'message/{@action}/{message}(/{@format})'
+  defaults:
+    '@format':     'html'
+    '@controller': 'Standard'

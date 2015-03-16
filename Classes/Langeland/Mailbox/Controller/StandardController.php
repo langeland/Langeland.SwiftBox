@@ -29,11 +29,12 @@ class StandardController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 	 */
 	public function indexAction($q = null) {
 
-		if($q){
-			die('Searching for: ' . $q);
+		if ($q) {
+			$messages = $this->messageRepository->findByQuery($q);
+			$this->view->assign('searchQuery', $q);
+		} else {
+			$messages = $this->messageRepository->findAll();
 		}
-
-		$messages = $this->messageRepository->findAll();
 
 		$this->view->assign('messages', $messages);
 	}
@@ -43,10 +44,25 @@ class StandardController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 	 * @return void
 	 */
 	public function showAction(\Langeland\Mailbox\Domain\Model\Message $message) {
-
-//		\TYPO3\Flow\var_dump($message->getRawMessage());
-//		echo get_resource_type($message->getRawMessage());
 		$this->view->assign('message', $message);
 	}
 
+	/**
+	 * @param \Langeland\Mailbox\Domain\Model\Message $message
+	 * @return void
+	 */
+	public function deleteAction(\Langeland\Mailbox\Domain\Model\Message $message) {
+		$this->messageRepository->remove($message);
+		$this->persistenceManager->persistAll();
+		$this->redirect('index');
+	}
+
+	/**
+	 * @return void
+	 */
+	public function deleteAllAction() {
+		$this->messageRepository->removeAll();
+		$this->persistenceManager->persistAll();
+		$this->redirect('index');
+	}
 }

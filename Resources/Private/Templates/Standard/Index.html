@@ -1,8 +1,9 @@
 {namespace mbx=Langeland\Mailbox\ViewHelpers}
-<f:layout name="Default"/>
+<f:layout name="Default" />
 
 <f:section name="Title">Mailbox</f:section>
 <f:section name="Content">
+	{f:uri.action(action:'index')}
 
 
 	<table class="table table-hover table-striped table-condensed">
@@ -16,18 +17,76 @@
 		</thead>
 		<tbody>
 		<f:for each="{messages}" as="message">
-			<tr class="clickable-row" data-href="{f:uri.action(action:'show', arguments: {message: message})}">
+			<tr class="clickable-row" data-toggle="modal" data-target="#messageModal" data-href="{f:uri.action(action:'show', arguments: {message: message})}" data-message-data="{f:uri.action(action:'show', format: 'data', arguments: {message: message})}">
 				<td>{mbx:format.email(emails: message.from)}</td>
 				<td>{mbx:format.email(emails: message.to)}</td>
 				<td>{message.subject}</td>
-				<td class="text-right"><f:format.date format="l, j M Y - g:i:s A">{message.date}</f:format.date></td>
+				<td class="text-right">
+					<f:format.date format="l, j M Y - g:i:s A">{message.date}</f:format.date>
+				</td>
 			</tr>
 		</f:for>
 		</tbody>
 	</table>
 
 
+	<!-- Modal -->
+	<div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="messageModelSubject">#messageModelSubject</h4>
+				</div>
+				<div class="modal-body">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-1">Date:</div>
+								<div id="message-date" class="col-md-11">.col-md-11</div>
+							</div>
+							<div class="row">
+								<div class="col-md-1">From:</div>
+								<div id="message-from" class="col-md-11">.col-md-11</div>
+							</div>
+							<div class="row">
+								<div class="col-md-1">To:</div>
+								<div id="message-to" class="col-md-11">.col-md-11</div>
+							</div>
+						</div>
+					</div>
 
+					<div role="tabpanel">
 
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active">
+								<a href="#home" aria-controls="home" role="tab" data-toggle="tab">Message</a></li>
+							<li role="presentation">
+								<a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Source</a></li>
+						</ul>
+
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="home">
+								<iframe src="{f:uri.action(action:'show', format: 'message', arguments: {message: message})}" id="message-render"></iframe>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="profile">...</div>
+						</div>
+
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+					<a class="btn btn-danger" id="message-delete" href="#" role="button">
+						<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true"></span> Delete message
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </f:section>
