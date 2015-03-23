@@ -28,14 +28,15 @@ class EmailViewHelper extends AbstractViewHelper {
 	 */
 	public function render($emails) {
 
+
 		foreach ($emails as $email => $name) {
-			if (is_numeric($email)) {
-				$a[] = '<span class="label label-primary" data-toggle="tooltip" data-placement="right" title="' . $name . '">' . $name . '</span>';
+			if ($name == NULL) {
+				$a[] = '<span class="label label-primary" data-toggle="tooltip" data-placement="right" title="' . $email . '">' . $email . '</span>';
 			} else {
 				$a[] = '<span class="label label-primary" data-toggle="tooltip" data-placement="right" title="' . $email . '">' . $name . '</span>';
 			}
 		}
-		return implode($a);
+		return implode(' ', $a);
 	}
 
 }

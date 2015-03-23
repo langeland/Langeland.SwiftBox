@@ -1,0 +1,21 @@
+<f:layout name="Default" />
+
+<f:section name="Title">Configuration</f:section>
+<f:section name="Content">
+
+	<div class="panel {f:if(condition: currentContextConfigurationCheck, then:'panel-success', else: 'panel-danger')}">
+		<div class="panel-heading">
+			<h3 class="panel-title" id="panel-title">
+			<f:if condition="{currentContextConfigurationCheck}">
+				<f:then>SwiftMailer is using SwiftBoxTransport</f:then>
+				<f:else>SwiftMailer is <strong>NOT</strong> using SwiftBoxTransport</f:else>
+			</f:if>
+			</h3>
+		</div>
+		<div class="panel-body">
+			<pre>{currentContextConfigurationPre}</pre>
+		</div>
+	</div>
+
+
+</f:section>

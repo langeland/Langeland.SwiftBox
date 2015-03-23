@@ -8,7 +8,7 @@ namespace Langeland\Mailbox\Controller;
 
 use TYPO3\Flow\Annotations as Flow;
 
-class StandardController extends \TYPO3\Flow\Mvc\Controller\ActionController {
+class SwiftBoxController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 
 	/**
 	 *
@@ -65,4 +65,5 @@ class StandardController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 		$this->persistenceManager->persistAll();
 		$this->redirect('index');
 	}
+
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Langeland\Mailbox\View\Standard;
+namespace Langeland\Mailbox\View\SwiftBox;
 
 /*                                                                        *
  * This script belongs to the TYPO3 Flow package "Langeland.Mailbox".     *

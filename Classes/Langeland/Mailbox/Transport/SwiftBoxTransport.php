@@ -13,7 +13,7 @@ use TYPO3\Flow\Annotations as Flow;
  *
  * Originally written by Ernesto Baschny <ernst@cron-it.de>
  */
-class LocalboxTransport implements \TYPO3\SwiftMailer\TransportInterface {
+class SwiftBoxTransport implements \TYPO3\SwiftMailer\TransportInterface {
 
 	/**
 	 *
@@ -27,20 +27,6 @@ class LocalboxTransport implements \TYPO3\SwiftMailer\TransportInterface {
 	 * @Flow\Inject
 	 */
 	protected $persistenceManager;
-
-	/**
-	 * @var string The file to write the mails into
-	 */
-	protected $mboxPathAndFilename;
-
-	/**
-	 * Set path and filename of mbox file to use.
-	 *
-	 * @param string $mboxPathAndFilename
-	 */
-	public function setMboxPathAndFilename($mboxPathAndFilename) {
-		$this->mboxPathAndFilename = $mboxPathAndFilename;
-	}
 
 	/**
 	 * The mbox transport is always started
@@ -76,16 +62,29 @@ class LocalboxTransport implements \TYPO3\SwiftMailer\TransportInterface {
 	 */
 	public function send(\Swift_Mime_Message $message, &$failedRecipients = NULL) {
 
-		$localMessage = new \Langeland\Mailbox\Domain\Model\Message();
-		$localMessage->setMessageId($message->getId());
-		$localMessage->setSubject($message->getSubject());
-		$localMessage->setDate(new \dateTime('@' . $message->getDate()));
-		$localMessage->setFrom($message->getFrom());
-		$localMessage->setTo($message->getTo());
-		$localMessage->setBody($message->getBody());
-		$localMessage->setRawMessage($message->toString());
+		$swiftBoxMessage = new \Langeland\Mailbox\Domain\Model\Message();
 
-		$this->messageRepository->add($localMessage);
+		$swiftBoxMessage->setMessageId($message->getId())
+			->setReturnPath($message->getReturnPath())
+			->setFrom($message->getFrom())
+			->setSender($message->getSender())
+			->setTo($message->getTo())
+			->setCc($message->getCc())
+			->setBcc($message->getBcc())
+			->setReplyTo($message->getReplyTo())
+			->setSubject($message->getSubject())
+			->setDate(new \dateTime('@' . $message->getDate()))
+			->setContentType($message->getContentType());
+
+//		$swiftBoxMessage->setContentTransferEncoding($message->getEncoder());
+
+		$swiftBoxMessage->setBody($message->getBody())
+			->setRawMessage($message->toString());
+
+
+//		die($message->getContentType());
+
+		$this->messageRepository->add($swiftBoxMessage);
 		$this->persistenceManager->persistAll();
 
 		// Return every receipient as "delivered"

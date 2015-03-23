@@ -4,22 +4,46 @@
 #
 
 -
-  name: 'Messages list'
-  uriPattern:    'messages'
+  name: 'SwiftBox list'
+  uriPattern:    ''
   defaults:
+    '@package':    'Langeland.Mailbox'
+    '@controller': 'SwiftBox'
     '@action':     'index'
     '@format':     'html'
 
 -
-  name: Mmailbox actions'
-  uriPattern:     'messages/{@action}(/{@format})'
+  name: Test actions'
+  uriPattern:     'test(/{@action})'
   defaults:
+    '@package':    'Langeland.Mailbox'
+    '@controller': 'Test'
+#    '@action':     'sendTestMails'
     '@format':     'html'
-    '@controller': 'Standard'
+
+-
+  name: Configuration actions'
+  uriPattern:     'configuration(/{@action})'
+  defaults:
+    '@package':    'Langeland.Mailbox'
+    '@controller': 'Configuration'
+    '@action':     'index'
+    '@format':     'html'
+
+-
+  name: SwiftBox actions'
+  uriPattern:     '{@action}(/{@format})'
+  defaults:
+    '@package':    'Langeland.Mailbox'
+    '@controller': 'SwiftBox'
+    '@format':     'html'
 
 -
   name: 'Message actions'
-  uriPattern:     'message/{@action}/{message}(/{@format})'
+  uriPattern:     '{@action}/{message}(/{@format})'
   defaults:
+    '@package':    'Langeland.Mailbox'
+    '@controller': 'SwiftBox'
     '@format':     'html'
-    '@controller': 'Standard'
+
+
