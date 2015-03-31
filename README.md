@@ -1,4 +1,4 @@
-# Langeland.Mailbox
+# Langeland.SwiftBox
 
 Add the following to Configuration/Routes.yaml:
 
@@ -7,10 +7,10 @@ Add the following to Configuration/Routes.yaml:
   name: 'SwiftBox'
   uriPattern: 'swiftbox/<SwiftBoxSubroutes>'
   defaults:
-    '@package': 'Langeland.Mailbox'
+    '@package': 'Langeland.SwiftBox'
   subRoutes:
     SwiftBoxSubroutes:
-      package: 'Langeland.Mailbox'
+      package: 'Langeland.SwiftBox'
 ```
 
 And then visit http://server.tld/swiftbox
