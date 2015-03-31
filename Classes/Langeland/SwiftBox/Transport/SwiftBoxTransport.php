@@ -1,8 +1,8 @@
 <?php
-namespace Langeland\Mailbox\Transport;
+namespace Langeland\SwiftBox\Transport;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Langeland.Mailbox".     *
+ * This script belongs to the TYPO3 Flow package "Langeland.SwiftBox".     *
  *                                                                        *
  *                                                                        */
 
@@ -17,7 +17,7 @@ class SwiftBoxTransport implements \TYPO3\SwiftMailer\TransportInterface {
 
 	/**
 	 *
-	 * @var \Langeland\Mailbox\Domain\Repository\MessageRepository
+	 * @var \Langeland\SwiftBox\Domain\Repository\MessageRepository
 	 * @Flow\Inject
 	 */
 	protected $messageRepository;
@@ -62,7 +62,7 @@ class SwiftBoxTransport implements \TYPO3\SwiftMailer\TransportInterface {
 	 */
 	public function send(\Swift_Mime_Message $message, &$failedRecipients = NULL) {
 
-		$swiftBoxMessage = new \Langeland\Mailbox\Domain\Model\Message();
+		$swiftBoxMessage = new \Langeland\SwiftBox\Domain\Model\Message();
 
 		$swiftBoxMessage->setMessageId($message->getId())
 			->setReturnPath($message->getReturnPath())

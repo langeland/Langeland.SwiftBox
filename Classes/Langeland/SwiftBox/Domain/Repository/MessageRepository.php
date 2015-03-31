@@ -1,8 +1,8 @@
 <?php
-namespace Langeland\Mailbox\Domain\Repository;
+namespace Langeland\SwiftBox\Domain\Repository;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Langeland.Mailbox".     *
+ * This script belongs to the TYPO3 Flow package "Langeland.SwiftBox".     *
  *                                                                        *
  *                                                                        */
 

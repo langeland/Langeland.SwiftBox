@@ -1,8 +1,8 @@
 <?php
-namespace Langeland\Mailbox\Controller;
+namespace Langeland\SwiftBox\Controller;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Langeland.Mailbox".     *
+ * This script belongs to the TYPO3 Flow package "Langeland.SwiftBox".     *
  *                                                                        *
  *                                                                        */
 
@@ -12,7 +12,7 @@ class SwiftBoxController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 
 	/**
 	 *
-	 * @var \Langeland\Mailbox\Domain\Repository\MessageRepository
+	 * @var \Langeland\SwiftBox\Domain\Repository\MessageRepository
 	 * @Flow\Inject
 	 */
 	protected $messageRepository;
@@ -40,18 +40,18 @@ class SwiftBoxController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 	}
 
 	/**
-	 * @param \Langeland\Mailbox\Domain\Model\Message $message
+	 * @param \Langeland\SwiftBox\Domain\Model\Message $message
 	 * @return void
 	 */
-	public function showAction(\Langeland\Mailbox\Domain\Model\Message $message) {
+	public function showAction(\Langeland\SwiftBox\Domain\Model\Message $message) {
 		$this->view->assign('message', $message);
 	}
 
 	/**
-	 * @param \Langeland\Mailbox\Domain\Model\Message $message
+	 * @param \Langeland\SwiftBox\Domain\Model\Message $message
 	 * @return void
 	 */
-	public function deleteAction(\Langeland\Mailbox\Domain\Model\Message $message) {
+	public function deleteAction(\Langeland\SwiftBox\Domain\Model\Message $message) {
 		$this->messageRepository->remove($message);
 		$this->persistenceManager->persistAll();
 		$this->redirect('index');

@@ -1,8 +1,8 @@
 <?php
-namespace Langeland\Mailbox\View\SwiftBox;
+namespace Langeland\SwiftBox\View\SwiftBox;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Langeland.Mailbox".     *
+ * This script belongs to the TYPO3 Flow package "Langeland.SwiftBox".     *
  *                                                                        *
  *                                                                        */
 
@@ -15,7 +15,7 @@ class ShowMessage extends \TYPO3\Flow\Mvc\View\AbstractView {
 	 */
 	public function render() {
 
-		/** @var \Langeland\Mailbox\Domain\Model\Message $message */
+		/** @var \Langeland\SwiftBox\Domain\Model\Message $message */
 		$message = $this->variables['message'];
 
 		$this->controllerContext->getResponse()->setHeader('Content-Type', $message->getContentType());

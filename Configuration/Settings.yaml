@@ -11,5 +11,5 @@
 TYPO3:
   SwiftMailer:
     transport:
-      type: 'Langeland\Mailbox\Transport\SwiftBoxTransport'
+      type: 'Langeland\SwiftBox\Transport\SwiftBoxTransport'
 

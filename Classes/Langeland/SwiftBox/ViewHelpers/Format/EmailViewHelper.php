@@ -1,8 +1,8 @@
 <?php
-namespace Langeland\Mailbox\ViewHelpers\Format;
+namespace Langeland\SwiftBox\ViewHelpers\Format;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Langeland.Mailbox".     *
+ * This script belongs to the TYPO3 Flow package "Langeland.SwiftBox".     *
  *                                                                        *
  *                                                                        */
 
@@ -16,7 +16,7 @@ use TYPO3\Fluid\Core\ViewHelper\Facets\CompilableInterface;
  * Class EmailViewHelper
  *
  * @author Jon Klixbüll Langeland <jon@moc.net>
- * @package Langeland\Mailbox\ViewHelpers\Format
+ * @package Langeland\SwiftBox\ViewHelpers\Format
  */
 class EmailViewHelper extends AbstractViewHelper {
 

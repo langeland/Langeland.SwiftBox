@@ -1,8 +1,8 @@
 <?php
-namespace Langeland\Mailbox\Controller;
+namespace Langeland\SwiftBox\Controller;
 
 /*                                                                        *
- * This script belongs to the TYPO3 Flow package "Langeland.Mailbox".     *
+ * This script belongs to the TYPO3 Flow package "Langeland.SwiftBox".     *
  *                                                                        *
  *                                                                        */
 
@@ -23,7 +23,7 @@ class ConfigurationController extends \TYPO3\Flow\Mvc\Controller\ActionControlle
 		$currentContextConfiguration = $this->configurationManager->getConfiguration(\TYPO3\Flow\Configuration\ConfigurationManager::CONFIGURATION_TYPE_SETTINGS, 'TYPO3.SwiftMailer');
 
 		$this->view->assignMultiple(array(
-				'currentContextConfigurationCheck' => ($currentContextConfiguration['transport']['type'] == 'Langeland\Mailbox\Transport\SwiftBoxTransport') ? TRUE : FALSE,
+				'currentContextConfigurationCheck' => ($currentContextConfiguration['transport']['type'] == 'Langeland\SwiftBox\Transport\SwiftBoxTransport') ? TRUE : FALSE,
 				'currentContextConfigurationPre' => \Symfony\Component\Yaml\Yaml::dump($currentContextConfiguration, 99, 2)
 			));
 
