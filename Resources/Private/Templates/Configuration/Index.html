@@ -2,20 +2,19 @@
 
 <f:section name="Title">Configuration</f:section>
 <f:section name="Content">
-
-	<div class="panel {f:if(condition: currentContextConfigurationCheck, then:'panel-success', else: 'panel-danger')}">
-		<div class="panel-heading">
-			<h3 class="panel-title" id="panel-title">
-			<f:if condition="{currentContextConfigurationCheck}">
-				<f:then>SwiftMailer is using SwiftBoxTransport</f:then>
-				<f:else>SwiftMailer is <strong>NOT</strong> using SwiftBoxTransport</f:else>
-			</f:if>
-			</h3>
+	<f:for each="{contextConfigurations}" key="contextString" as="contextConfiguration">
+		<div class="panel {f:if(condition: contextConfiguration.check, then:'panel-success', else: 'panel-danger')}">
+			<div class="panel-heading">
+				<h3 class="panel-title" id="panel-title">
+					<f:if condition="{contextConfiguration.check}">
+						<f:then><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> {contextString}: SwiftMailer is using SwiftBoxTransport</f:then>
+						<f:else><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {contextString}: SwiftMailer is <strong>NOT</strong> using SwiftBoxTransport</f:else>
+					</f:if>
+				</h3>
+			</div>
+			<div class="panel-body">
+				<pre>{contextConfiguration.source}</pre>
+			</div>
 		</div>
-		<div class="panel-body">
-			<pre>{currentContextConfigurationPre}</pre>
-		</div>
-	</div>
-
-
+	</f:for>
 </f:section>

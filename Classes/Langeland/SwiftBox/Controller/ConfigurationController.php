@@ -20,33 +20,36 @@ class ConfigurationController extends \TYPO3\Flow\Mvc\Controller\ActionControlle
 	 * @return void
 	 */
 	public function indexAction() {
-		$currentContextConfiguration = $this->configurationManager->getConfiguration(\TYPO3\Flow\Configuration\ConfigurationManager::CONFIGURATION_TYPE_SETTINGS, 'TYPO3.SwiftMailer');
 
-		$this->view->assignMultiple(array(
-				'currentContextConfigurationCheck' => ($currentContextConfiguration['transport']['type'] == 'Langeland\SwiftBox\Transport\SwiftBoxTransport') ? TRUE : FALSE,
-				'currentContextConfigurationPre' => \Symfony\Component\Yaml\Yaml::dump($currentContextConfiguration, 99, 2)
+		$contextStrings = array('Development', 'Production', 'Testing');
+		$contextConfigurations = array();
+
+		foreach ($contextStrings AS $contextString) {
+			$output = [];
+
+			$cmd = vsprintf('FLOW_CONTEXT=%s %sflow swiftbox:configuration:show', array(
+				$contextString,
+				FLOW_PATH_ROOT
 			));
 
-//		$contextStrings = array('Development', 'Production', 'Testing');
-//		$contextConfigurations = array();
-//
-//		foreach($contextStrings AS $contextString){
-//
-//			$applicationContext = new \TYPO3\Flow\Core\ApplicationContext($contextString);
-//
-//			$contextConfigurationManager = $this->objectManager->get('\TYPO3\Flow\Configuration\ConfigurationManager', $applicationContext);
-//
-//			//$contextConfigurationManager = new \TYPO3\Flow\Configuration\ConfigurationManager($applicationContext);
-//
-//			$contextConfigurations[$contextString] = \Symfony\Component\Yaml\Yaml::dump(
-//				$contextConfigurationManager->getConfiguration(\TYPO3\Flow\Configuration\ConfigurationManager::CONFIGURATION_TYPE_SETTINGS, 'TYPO3.SwiftMailer'),
-//				99, 2);
-//
-////			$contextConfigurations[$contextString] =  $contextConfigurationManager->getConfiguration(\TYPO3\Flow\Configuration\ConfigurationManager::CONFIGURATION_TYPE_SETTINGS, 'TYPO3.SwiftMailer');
-//
-//		}
-//
-//		$this->view->assign('contextConfigurations', $contextConfigurations);
+			exec($cmd, $output, $result);
+
+			if ($result === 0) {
+				$configurations = json_decode($output[0], TRUE);
+				$contextConfigurations[$contextString] = array(
+					'check' => ($configurations['transport']['type'] == 'Langeland\SwiftBox\Transport\SwiftBoxTransport') ? TRUE : FALSE,
+					'source' => \Symfony\Component\Yaml\Yaml::dump($configurations, 99, 2)
+				);
+			} else {
+				$contextConfigurations[$contextString] = array(
+					'check' => FALSE,
+					'source' => 'N/A'
+				);
+			}
+
+		}
+
+		$this->view->assign('contextConfigurations', $contextConfigurations);
 
 	}
 

@@ -13,4 +13,13 @@ Add the following to Configuration/Routes.yaml:
       package: 'Langeland.SwiftBox'
 ```
 
+And add the following to your Settings.yaml
+
+```yaml
+TYPO3:
+  SwiftMailer:
+    transport:
+      type: 'Langeland\SwiftBox\Transport\SwiftBoxTransport'
+````
+
 And then visit http://server.tld/swiftbox

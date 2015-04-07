@@ -1,15 +1,6 @@
-#                                                                        #
-# Production Settings                                                       #
-#                                                                        #
-# This file contains settings for various parts of the application.      #
-# Copy this file to Settings.yaml, and adjust as necessary.              #
-#                                                                        #
-# Please refer to the default settings file(s) or the manuals for        #
-# possible configuration options.                                        #
-#                                                                        #
 
-TYPO3:
-  SwiftMailer:
-    transport:
-      type: 'Langeland\SwiftBox\Transport\SwiftBoxTransport'
+#TYPO3:
+#  SwiftMailer:
+#    transport:
+#      type: 'Langeland\SwiftBox\Transport\SwiftBoxTransport'
 

@@ -1,7 +1,7 @@
 {
     "name": "langeland/swiftbox",
     "type": "typo3-flow-package",
-    "description": "Add description here",
+    "description": "SwiftBox is a simple mail catcher package for typo3/swiftmailer.",
     "require": {
         "typo3/swiftmailer": "*"
     },
